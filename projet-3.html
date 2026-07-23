@@ -10,43 +10,30 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #1a2044;
-      --navy-light: #2a3260;
-      --accent: #4f5fa8;
-      --accent-light: #7b8fd4;
+      --blue: #1400b0;
       --white: #ffffff;
-      --off-white: #f5f5f7;
-      --text: #222;
-      --muted: #666;
+      --off-white: #f7f7f7;
+      --text: #111;
+      --muted: #555;
       --font: 'Clash Display', 'Helvetica Neue', Arial, sans-serif;
     }
 
-    body {
-      font-family: var(--font);
-      color: var(--text);
-      background: var(--white);
-    }
+    body { font-family: var(--font); color: var(--text); background: var(--white); }
 
-    /* ── Nav ── */
+    /* Nav */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+      background: var(--blue);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1.2rem 3rem;
-      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .nav-logo {
-      color: var(--white);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .nav-logo svg { height: 26px; width: auto; fill: var(--white); }
 
     .nav-back {
       display: inline-flex;
@@ -54,106 +41,81 @@
       gap: 0.5rem;
       color: rgba(255,255,255,0.75);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
     .nav-back:hover { color: var(--white); }
+    .nav-back svg { width: 16px; height: 16px; }
 
-    /* ── Hero projet ── */
-    .projet-hero {
-      margin-top: 64px;
+    /* Hero */
+    .hero {
       width: 100%;
-      height: 60vh;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+      height: 55vh;
+      background: #111;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,0.25);
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      position: relative;
       overflow: hidden;
     }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* Si tu mets une image : remplace le div.projet-hero par <img> */
-    .projet-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── Contenu ── */
-    .projet-content {
+    /* Contenu */
+    .content {
       max-width: 860px;
       margin: 0 auto;
-      padding: 5rem 2rem 6rem;
+      padding: 4rem 2rem 5rem;
     }
 
-    /* Infos en tête */
-    .projet-meta {
+    .meta {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
+      padding-bottom: 1.5rem;
       border-bottom: 1px solid #eee;
+      margin-bottom: 2rem;
     }
 
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
+    .meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
 
     .meta-label {
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--blue);
       font-weight: 700;
     }
 
-    .meta-value {
-      font-size: 0.95rem;
-      color: var(--text);
-      font-weight: 500;
-    }
+    .meta-value { font-size: 0.9rem; color: var(--text); font-weight: 500; }
 
-    /* Titre */
     .projet-title {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
-      color: var(--navy);
+      color: var(--text);
       letter-spacing: -0.02em;
       line-height: 1.1;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
-    /* Texte de description */
     .projet-desc {
+      font-size: 0.95rem;
       color: var(--muted);
-      font-size: 1rem;
       line-height: 1.8;
-      max-width: 640px;
+      max-width: 580px;
       margin-bottom: 3rem;
     }
+    .projet-desc p + p { margin-top: 0.8rem; }
 
-    .projet-desc p + p { margin-top: 1rem; }
+    /* Galerie */
+    .galerie { display: flex; flex-direction: column; gap: 1rem; }
 
-    /* ── Galerie photos ── */
-    .galerie {
-      display: grid;
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    /* Layout par défaut : une image large puis 2 en dessous */
-    .galerie-main {
+    .img-main {
       width: 100%;
       aspect-ratio: 16/9;
       object-fit: cover;
@@ -162,163 +124,114 @@
       background: var(--off-white);
     }
 
-    .galerie-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .galerie-grid img,
-    .galerie-single img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-      border-radius: 3px;
-      background: var(--off-white);
-    }
-
-    /* Placeholder visuel quand pas d'image */
     .img-placeholder {
-      background: linear-gradient(135deg, #e8eaf0 0%, #d0d4e8 100%);
+      background: #e8e8e8;
       border-radius: 3px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #aaa;
-      font-size: 0.8rem;
+      color: #bbb;
+      font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
-
     .img-placeholder.main { width: 100%; aspect-ratio: 16/9; }
-    .img-placeholder.grid { width: 100%; aspect-ratio: 4/3; }
+    .img-placeholder.half { width: 100%; aspect-ratio: 4/3; }
 
-    /* ── Footer ── */
-    .projet-footer {
+    .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .img-row img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 3px; background: var(--off-white); }
+
+    /* Footer nav */
+    .footer-nav {
       max-width: 860px;
       margin: 0 auto;
       padding: 2rem;
       border-top: 1px solid #eee;
       display: flex;
       justify-content: space-between;
-      align-items: center;
     }
 
-    .footer-nav a {
-      color: var(--accent);
+    .footer-link {
+      color: var(--blue);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: color 0.2s;
+      transition: opacity 0.2s;
     }
-
-    .footer-nav a:hover { color: var(--navy); }
+    .footer-link:hover { opacity: 0.65; }
 
     footer {
-      background: var(--navy);
+      background: var(--blue);
       text-align: center;
-      padding: 1.5rem;
-      color: rgba(255,255,255,0.3);
-      font-size: 0.78rem;
+      padding: 1.2rem;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.75rem;
       letter-spacing: 0.05em;
-      margin-top: 4rem;
+      margin-top: 3rem;
     }
 
     @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; }
-      .galerie-grid { grid-template-columns: 1fr; }
-      .projet-meta { gap: 1.2rem; }
+      .content { padding: 2.5rem 1.5rem 3rem; }
+      .meta { gap: 1.2rem; }
+      .img-row { grid-template-columns: 1fr; }
+      .hero { height: 35vh; }
     }
   </style>
 </head>
 <body>
 
-<!-- Nav -->
 <nav>
-  <a href="index.html" class="nav-logo">MCG</a>
+  <a href="index.html" class="nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 182.59"><path d="M437.73,112.27c-.54-1.8-1.3-3.69-2.28-5.67-.99-1.97-2.26-3.55-3.81-4.74-1.55-1.18-3.37-1.95-5.46-2.28-1.69-.28-3.38-.2-5.08.25-1.41.34-3.1,1.2-5.08,2.58-1.97,1.38-3.58,2.64-4.82,3.76-1.24,1.13-2.93,2.76-5.08,4.91-2.2,2.2-4,3.89-5.41,5.08-3.44,2.82-7.12,5.1-11.04,6.85-3.92,1.75-7.26,2.31-10.02,1.69-2.2-.45-3.81-1.72-4.82-3.81-1.07-2.25-1.58-4.67-1.52-7.23.06-2.57.37-4.65.93-6.26.56-1.61,1.47-3.9,2.71-6.89l.51-1.27c5.08-12.18,11.22-21.91,18.44-29.18,9.3-9.36,19.71-14.35,31.21-14.97.68-.06,1.72-.08,3.13-.08,3.1.17,6.06-.28,8.88-1.35,3.44-1.75,5.22-4.6,5.33-8.54-.11-3.95-1.89-6.82-5.33-8.63-2.03-.96-4.14-1.47-6.34-1.52-2.03-.11-3.55-.17-4.57-.17-8.12.06-15.9,1.61-23.35,4.65-7.44,3.05-14.04,7.39-19.79,13.03-8.01,7.84-14.73,16.92-20.18,27.24-5.44,10.32-10.02,22.7-13.75,37.14-.73,2.82-1.23,5.55-1.48,8.2-.25,2.65-.01,5.66.72,9.01.73,3.36,2.2,6.02,4.4,7.99,5.98,5.24,14.04,6.91,24.19,4.99,5.92-1.07,11.5-3.13,16.75-6.17.96-.56,3.24-2.09,6.85-4.57.28-.17.65-.42,1.1-.76.45-.34.82-.59,1.1-.76.11-.06.41-.24.89-.55.48-.31.92-.58,1.31-.8,4.23-2.65,6.71-4.23,7.44-4.74,1.35-.96,2.73-1.13,4.14-.51,1.47.62,2.34,1.75,2.62,3.38.79,5.24,2.42,8.91,4.91,11,2.71,2.26,5.78,2.85,9.22,1.78,1.58-.51,2.95-1.37,4.1-2.58,1.16-1.21,1.93-2.63,2.33-4.27.51-3.05.31-6.15-.59-9.31l-1.86-9.39c-.51-2.54-1.03-4.71-1.57-6.51M323.83,117.94c-1.18-.56-2.45-.9-3.81-1.02-1.35-.11-2.88.01-4.57.38-1.69.37-3.05.69-4.06.97-1.02.28-2.54.76-4.57,1.44l-.51.17c-16.81,5.7-31.41,7.13-43.82,4.31-7.78-1.69-12.15-5.1-13.11-10.24-.51-3.38-.14-6.8,1.1-10.23,1.75-5.75,4.27-10.8,7.57-15.14,3.3-4.34,7.85-9.11,13.66-14.29,2.71-2.42,6.26-4.88,10.66-7.36,4.4-2.48,8.13-4.4,11.21-5.75,3.07-1.35,7.01-3.02,11.8-4.99l1.18-.51c4.29-1.69,6.94-4,7.95-6.94.73-2.26.56-4.4-.51-6.43-1.52-2.99-3.95-5.08-7.27-6.26-1.69-.56-3.47-.85-5.33-.85-4.29.17-8.43,1.13-12.43,2.88-11.79,4.96-22.3,11.81-31.55,20.56-9.42,8.06-17.12,17.51-23.09,28.34-3.33,6.43-5.44,12.82-6.34,19.16-.9,6.34-.48,12.05,1.27,17.13,1.47,4,3.65,7.57,6.56,10.7,2.9,3.13,6.33,5.51,10.28,7.15,9.64,4.51,20.85,6.57,33.63,6.17,12.77-.39,25.93-3.21,39.46-8.46,3.05-.9,5.72-2.48,8.04-4.74,2.59-3.16,3.16-6.6,1.69-10.32-.9-2.71-2.59-4.65-5.08-5.84M202.52,109.23c-.39-2.03-1.02-5.27-1.86-9.73-.85-4.45-1.52-7.98-2.03-10.57-.51-2.59-1.21-5.74-2.11-9.43-.9-3.69-1.83-7.06-2.79-10.11-.96-2.88-1.85-5.43-2.66-7.66-.82-2.23-1.92-4.72-3.3-7.49-1.38-2.76-2.82-5.16-4.31-7.19-1.49-2.03-3.31-3.95-5.46-5.75-2.14-1.8-4.46-3.21-6.94-4.23-1.92-.79-3.84-1.27-5.75-1.44-1.52-.17-3.02-.08-4.48.25-2.54.56-5.05,1.72-7.53,3.47l-.17.08c-1.13.62-2.17,1.47-3.13,2.54-.9.96-1.92,2.31-3.05,4.06l-.59.85c-3.33,4.85-7.75,12.24-13.28,22.16-.34.68-.87,1.68-1.61,3-.73,1.33-1.3,2.3-1.69,2.92-1.75,2.99-3.95,6.65-6.6,11l-1.27,2.03c-1.24,2.09-2.62,4.34-4.14,6.77l-2.11,3.38c-.28.45-.7.62-1.27.51-.56-.11-.9-.42-1.02-.93l-.76-3.89c-.34-1.58-.83-3.98-1.48-7.19-.65-3.21-1.14-5.61-1.48-7.19-1.07-5.24-2.65-10.35-4.74-15.31-.34-.79-.85-1.92-1.52-3.38-.85-1.58-1.92-3.07-3.21-4.48l-.34-.42c-1.13-.9-2.31-1.75-3.55-2.54-1.92-1.02-3.89-1.75-5.92-2.2-2.09-.45-4.06-.68-5.92-.68-1.47,0-3.13.2-4.99.59-3.21.79-5.95,2.23-8.21,4.31-2.71,2.88-4.91,6.26-6.6,10.15l-.59,1.02c-1.3,2.59-2.82,5.95-4.57,10.07-.17.34-.44.97-.8,1.9-.37.93-.66,1.62-.89,2.07-.56,1.24-1.35,3.1-2.37,5.58-1.02,2.48-1.81,4.34-2.37,5.58l-2.11,4.82c-4.34,10.21-9.36,22.13-15.06,35.78-.68,2.43-.31,4.85,1.1,7.27,1.47,2.43,3.5,4.03,6.09,4.82,1.07.45,2.1.59,3.09.42.99-.17,1.87-.34,2.66-.51.79-.17,1.56-.59,2.33-1.27.76-.68,1.41-1.31,1.95-1.9.54-.59,1.08-1.38,1.65-2.37.56-.99,1.04-1.89,1.44-2.71.39-.82.82-1.76,1.27-2.83.45-1.07.82-2.03,1.1-2.88.28-.85.6-1.76.97-2.75.37-.99.69-1.79.97-2.41,3.21-7.67,8.09-19.17,14.63-34.51l.93-2.03c.34-.73.85-1.89,1.52-3.47.68-1.58,1.18-2.73,1.52-3.47.51-1.18,1.31-2.07,2.41-2.66,1.1-.59,2.3-.77,3.59-.55,1.13.23,2.13.73,3,1.52.87.79,1.42,1.75,1.65,2.88.17.73.41,1.85.72,3.34.31,1.49.55,2.64.72,3.43l.68,2.88c.56,2.65,1.35,6.63,2.37,11.93l1.27,6.6.34,1.86c.39,3.16,1.27,6.29,2.62,9.39.56,1.35,1.24,2.43,2.03,3.21,1.97,1.92,4.33,3.1,7.06,3.55,2.73.45,5.34.08,7.82-1.1,2.93-1.47,6.34-4.68,10.24-9.64,5.81-7.5,13.34-19.37,22.58-35.61,5.53-9.53,9.39-16.04,11.59-19.54.68-1.13,1.61-1.95,2.79-2.45,1.35-.56,2.71-.59,4.06-.08,1.35.51,2.37,1.41,3.05,2.71,2.37,4.57,4.44,9.8,6.22,15.69,1.78,5.89,3.03,10.79,3.76,14.68.73,3.89,1.64,9.39,2.71,16.49,1.24,8.85,2.99,17.76,5.24,26.73.51,1.97,1.52,3.65,3.05,5.03,1.52,1.38,3.3,2.19,5.33,2.41,2.03.28,3.96-.04,5.79-.97,1.83-.93,3.26-2.27,4.27-4.02,1.41-2.37,1.75-4.88,1.02-7.53-.11-.34-1.64-7.89-4.57-22.67"/></svg>
+  </a>
   <a href="index.html#projets" class="nav-back">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
     Retour aux projets
   </a>
 </nav>
 
-<!-- Image principale — remplace le div par une balise img si tu as une image -->
-<div class="projet-hero">
+<div class="hero">
   Ajoute ton image principale ici
-  <!-- <img src="images/projet-3-hero.jpg" alt="Titre du projet 3" /> -->
+  <!-- <img src="images/projet-1-hero.jpg" alt="Titre du projet" /> -->
 </div>
 
-<!-- Contenu -->
-<div class="projet-content">
-
-  <!-- Métadonnées -->
-  <div class="projet-meta">
-    <div class="meta-item">
-      <span class="meta-label">Client</span>
-      <span class="meta-value">Écomiam</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Année</span>
-      <span class="meta-value">2025</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Catégorie</span>
-      <span class="meta-value">Print · Identité visuelle</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Outils</span>
-      <span class="meta-value">Adobe InDesign · Illustrator</span>
-    </div>
+<div class="content">
+  <div class="meta">
+    <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Écomiam</span></div>
+    <div class="meta-item"><span class="meta-label">Année</span><span class="meta-value">2025</span></div>
+    <div class="meta-item"><span class="meta-label">Catégorie</span><span class="meta-value">Print · Identité visuelle</span></div>
+    <div class="meta-item"><span class="meta-label">Outils</span><span class="meta-value">InDesign · Illustrator</span></div>
   </div>
 
-  <!-- Titre + description -->
-  <h1 class="projet-title">Titre du projet 3</h1>
-
+  <h1 class="projet-title">Titre du projet</h1>
   <div class="projet-desc">
-    <p>Décris ici le contexte du projet : brief reçu, objectif, contraintes. Une ou deux phrases suffisent pour poser la situation.</p>
-    <p>Ensuite explique ta démarche et tes choix créatifs. Qu'est-ce que tu as apporté ? Qu'est-ce qui fait que ce projet est intéressant à montrer ?</p>
+    <p>Décris ici le contexte du projet : brief reçu, objectif, contraintes.</p>
+    <p>Explique ta démarche et tes choix créatifs.</p>
   </div>
 
-  <!-- Galerie -->
   <div class="galerie">
-
-    <!-- Image large -->
     <div class="img-placeholder main">Image principale</div>
-    <!-- <img class="galerie-main" src="images/projet-3-a.jpg" alt="" /> -->
-
-    <!-- Deux images côte à côte -->
-    <div class="galerie-grid">
-      <div class="img-placeholder grid">Image 2</div>
-      <div class="img-placeholder grid">Image 3</div>
-      <!-- <img src="images/projet-3-b.jpg" alt="" />
-           <img src="images/projet-3-c.jpg" alt="" /> -->
+    <!-- <img class="img-main" src="images/projet-1-a.jpg" alt="" /> -->
+    <div class="img-row">
+      <div class="img-placeholder half">Image 2</div>
+      <div class="img-placeholder half">Image 3</div>
     </div>
-
-    <!-- Image simple pleine largeur -->
-    <div class="galerie-grid">
-      <div class="img-placeholder grid">Image 4</div>
-      <div class="img-placeholder grid">Image 5</div>
+    <div class="img-row">
+      <div class="img-placeholder half">Image 4</div>
+      <div class="img-placeholder half">Image 5</div>
     </div>
-
   </div>
 </div>
 
-<!-- Navigation entre projets -->
-<div class="projet-footer">
-  <div class="footer-nav">
-    <a href="projet-4.html">← Projet précédent</a>
-  </div>
-  <div class="footer-nav">
-    <a href="projet-2.html">Projet suivant →</a>
-  </div>
+<div class="footer-nav">
+  <a href="projet-2.html" class="footer-link">← Projet précédent</a>
+  <a href="projet-4.html" class="footer-link">Projet suivant →</a>
 </div>
 
-<footer>
-  © 2026 Marie Caroff-Gourvil — Tous droits réservés
-</footer>
+<footer>© 2026 Marie Caroff-Gourvil</footer>
 
 </body>
 </html>

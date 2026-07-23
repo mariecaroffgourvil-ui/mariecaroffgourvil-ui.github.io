@@ -7,18 +7,15 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" />
   <style>
-    /* ── Reset & base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #0d0084;
-      --navy-light: #2a3260;
-      --accent: #4f5fa8;
-      --accent-light: #7b8fd4;
+      --blue: #1400b0;
+      --blue-dim: rgba(255,255,255,0.08);
       --white: #ffffff;
-      --off-white: #f5f5f7;
-      --text: #222;
-      --muted: #666;
+      --off-white: #f7f7f7;
+      --text: #111;
+      --muted: #555;
       --font: 'Clash Display', 'Helvetica Neue', Arial, sans-serif;
     }
 
@@ -32,23 +29,25 @@
 
     /* ── Nav ── */
     nav {
-      position: fixed;
+      position: absolute;
       top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 3rem;
-      background: var(--navy);
+      padding: 1.4rem 3rem;
     }
 
     .nav-logo {
-      color: var(--white);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
+    }
+
+    .nav-logo svg {
+      height: 28px;
+      width: auto;
+      fill: var(--white);
     }
 
     .nav-links {
@@ -58,598 +57,417 @@
     }
 
     .nav-links a {
-      color: rgba(255,255,255,0.75);
+      color: var(--white);
       text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
     }
 
-    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover { opacity: 0.7; }
 
     /* ── Hero ── */
     #accueil {
-      min-height: 100vh;
-      background: var(--navy);
+      background: var(--blue);
+      min-height: 60vh;
+      position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+      padding: 8rem 5rem 6rem;
     }
 
-    .hero-inner h1 {
+    .hero-watermark {
+      position: absolute;
+      left: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42%;
+      opacity: 0.07;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .hero-watermark svg {
+      width: 100%;
+      height: auto;
+      fill: var(--white);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      margin-left: auto;
+      max-width: 640px;
+      width: 100%;
+    }
+
+    .hero-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-name {
       color: var(--white);
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
     }
 
-    .hero-inner h1 span {
-      color: var(--accent-light);
+    .hero-desc {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-bottom: 1.8rem;
+      line-height: 1.5;
     }
 
-    .hero-inner p {
-      margin-top: 1.5rem;
-      color: rgba(255,255,255,0.65);
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      max-width: 520px;
-      line-height: 1.7;
-    }
-
-    .hero-cta {
+    .btn-outline {
       display: inline-block;
-      margin-top: 2.5rem;
-      padding: 0.9rem 2.2rem;
-      background: var(--accent-light);
+      padding: 0.6rem 1.6rem;
+      border: 2px solid var(--white);
       color: var(--white);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      transition: background 0.2s;
+      border-radius: 50px;
+      transition: background 0.2s, color 0.2s;
     }
 
-    .hero-cta:hover { background: var(--accent); }
-
-    /* ── Section base ── */
-    section { padding: 6rem 2rem; }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 800;
-      color: var(--navy);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--blue);
     }
 
-    .section-title span { color: var(--accent); }
-
-    .section-line {
-      width: 3rem;
-      height: 3px;
-      background: var(--accent);
-      margin-bottom: 3rem;
+    /* ── Compétences ── */
+    #competences {
+      padding: 5rem 3rem;
+      background: var(--white);
     }
 
-    .container {
-      max-width: 1000px;
+    .competences-grid {
+      max-width: 1100px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      text-align: center;
     }
 
-    /* ── Projets — Carrousel ── */
-    #projets { background: var(--off-white); }
-
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      border-radius: 4px;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .carousel-slide:hover .slide-overlay {
-      opacity: 1;
-    }
-
-    .slide-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(26,32,68,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .slide-overlay span {
-      color: var(--white);
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: 2px solid var(--white);
-      padding: 0.6rem 1.4rem;
-      border-radius: 2px;
-    }
-
-    .carousel-img {
-      width: 100%;
-      height: 520px;
-      object-fit: cover;
-      display: block;
-      background: var(--navy-light);
-    }
-
-    /* Placeholder quand pas d'image */
-    .carousel-placeholder {
-      width: 100%;
-      height: 520px;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.3);
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .carousel-caption {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 2rem;
-      background: linear-gradient(to top, rgba(26,32,68,0.95) 0%, transparent 100%);
-      color: var(--white);
-    }
-
-    .carousel-caption h3 {
-      font-size: 1.3rem;
+    .comp-item h3 {
+      font-size: 1.15rem;
       font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.8rem;
     }
 
-    .carousel-caption p {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.65);
-      margin-top: 0.3rem;
+    .comp-item p {
+      font-size: 0.88rem;
+      color: var(--blue);
+      line-height: 1.7;
+      font-weight: 400;
     }
 
-    .carousel-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1.5rem;
+    /* ── Projets ── */
+    #projets {
+      padding: 4rem 3rem 5rem;
+      background: var(--white);
     }
 
-    .carousel-btn {
-      width: 42px; height: 42px;
-      border: 2px solid var(--navy);
-      background: transparent;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
+    .projets-inner { max-width: 1100px; margin: 0 auto; }
+
+    .projets-titre {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 2.5rem;
     }
 
-    .carousel-btn:hover {
-      background: var(--navy);
-      color: var(--white);
-    }
-
-    .carousel-btn svg { width: 16px; height: 16px; }
-
-    .carousel-dots {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--muted);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .dot.active { background: var(--navy); }
-
-    /* ── À propos ── */
-    #a-propos { background: var(--white); }
-
-    .apropos-grid {
+    .projets-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .apropos-text p {
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 1rem;
-    }
-
-    .apropos-text p + p { margin-top: 1rem; }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
     }
 
-    .skills-block h4 {
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
+    .projet-card { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .projet-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #ddd;
+      border-radius: 2px;
+    }
+
+    .projet-card-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #111;
+      border-radius: 2px;
+    }
+
+    .projet-card h4 {
+      font-size: 1rem;
       font-weight: 700;
-    }
-
-    .skills-block ul {
-      list-style: none;
-    }
-
-    .skills-block ul li {
-      font-size: 0.9rem;
       color: var(--text);
-      padding: 0.35rem 0;
-      border-bottom: 1px solid #eee;
-      line-height: 1.4;
+      margin-top: 0.4rem;
     }
+
+    .projet-card span {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .btn-filled {
+      display: inline-block;
+      margin-top: 0.4rem;
+      padding: 0.5rem 1.2rem;
+      background: var(--blue);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: opacity 0.2s;
+      width: fit-content;
+    }
+
+    .btn-filled:hover { opacity: 0.8; }
 
     /* ── Contact ── */
-    #contact { background: var(--navy); }
+    #contact {
+      padding: 5rem 3rem 6rem;
+      background: var(--white);
+    }
 
-    #contact .section-title { color: var(--white); }
-    #contact .section-line { background: var(--accent-light); }
-
-    .contact-grid {
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 5rem;
       align-items: start;
     }
 
-    .contact-info p {
-      color: rgba(255,255,255,0.65);
-      line-height: 1.8;
+    .contact-left h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-left p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
       margin-bottom: 1.5rem;
     }
 
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .contact-link {
+    .linkedin-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      color: var(--accent-light);
+      color: var(--text);
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
+      transition: opacity 0.2s;
     }
 
-    .contact-link:hover { color: var(--white); }
+    .linkedin-link:hover { opacity: 0.6; }
 
-    /* Formulaire */
+    .linkedin-link svg { width: 24px; height: 24px; }
+
     .contact-form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
+    .contact-form input {
       width: 100%;
       padding: 0.9rem 1rem;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 2px;
-      color: var(--white);
+      background: var(--off-white);
+      border: none;
+      border-radius: 4px;
       font-family: var(--font);
       font-size: 0.9rem;
+      color: var(--text);
       outline: none;
-      transition: border-color 0.2s;
     }
 
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-      color: rgba(255,255,255,0.35);
-    }
+    .contact-form input::placeholder { color: #aaa; }
 
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: var(--accent-light);
-    }
-
-    .contact-form textarea { height: 130px; resize: vertical; }
-
-    .form-submit {
-      padding: 0.9rem 2rem;
-      background: var(--accent-light);
+    .btn-submit {
+      padding: 0.8rem 2rem;
+      background: var(--blue);
       color: var(--white);
       border: none;
-      border-radius: 2px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      border-radius: 50px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s;
-      align-self: flex-start;
+      width: fit-content;
+      transition: opacity 0.2s;
     }
 
-    .form-submit:hover { background: var(--accent); }
-
-    /* ── Footer ── */
-    footer {
-      background: #111826;
-      text-align: center;
-      padding: 1.5rem;
-      color: rgba(255,255,255,0.3);
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
-    }
+    .btn-submit:hover { opacity: 0.8; }
 
     /* ── Responsive ── */
-    @media (max-width: 700px) {
+    @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1rem; }
-      .apropos-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .carousel-img, .carousel-placeholder { height: 280px; }
+      #accueil { padding: 5rem 1.5rem 3rem; }
+      .hero-watermark { font-size: 6rem; }
+      .hero-content { margin-left: 0; }
+      .competences-grid { grid-template-columns: 1fr; gap: 2rem; }
+      #competences, #projets, #contact { padding: 3rem 1.5rem; }
+      .projets-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Navigation ── -->
+<!-- ── Nav ── -->
 <nav>
-  <a href="#accueil" class="nav-logo">MCG</a>
+  <a href="#accueil" class="nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 182.59"><path d="M437.73,112.27c-.54-1.8-1.3-3.69-2.28-5.67-.99-1.97-2.26-3.55-3.81-4.74-1.55-1.18-3.37-1.95-5.46-2.28-1.69-.28-3.38-.2-5.08.25-1.41.34-3.1,1.2-5.08,2.58-1.97,1.38-3.58,2.64-4.82,3.76-1.24,1.13-2.93,2.76-5.08,4.91-2.2,2.2-4,3.89-5.41,5.08-3.44,2.82-7.12,5.1-11.04,6.85-3.92,1.75-7.26,2.31-10.02,1.69-2.2-.45-3.81-1.72-4.82-3.81-1.07-2.25-1.58-4.67-1.52-7.23.06-2.57.37-4.65.93-6.26.56-1.61,1.47-3.9,2.71-6.89l.51-1.27c5.08-12.18,11.22-21.91,18.44-29.18,9.3-9.36,19.71-14.35,31.21-14.97.68-.06,1.72-.08,3.13-.08,3.1.17,6.06-.28,8.88-1.35,3.44-1.75,5.22-4.6,5.33-8.54-.11-3.95-1.89-6.82-5.33-8.63-2.03-.96-4.14-1.47-6.34-1.52-2.03-.11-3.55-.17-4.57-.17-8.12.06-15.9,1.61-23.35,4.65-7.44,3.05-14.04,7.39-19.79,13.03-8.01,7.84-14.73,16.92-20.18,27.24-5.44,10.32-10.02,22.7-13.75,37.14-.73,2.82-1.23,5.55-1.48,8.2-.25,2.65-.01,5.66.72,9.01.73,3.36,2.2,6.02,4.4,7.99,5.98,5.24,14.04,6.91,24.19,4.99,5.92-1.07,11.5-3.13,16.75-6.17.96-.56,3.24-2.09,6.85-4.57.28-.17.65-.42,1.1-.76.45-.34.82-.59,1.1-.76.11-.06.41-.24.89-.55.48-.31.92-.58,1.31-.8,4.23-2.65,6.71-4.23,7.44-4.74,1.35-.96,2.73-1.13,4.14-.51,1.47.62,2.34,1.75,2.62,3.38.79,5.24,2.42,8.91,4.91,11,2.71,2.26,5.78,2.85,9.22,1.78,1.58-.51,2.95-1.37,4.1-2.58,1.16-1.21,1.93-2.63,2.33-4.27.51-3.05.31-6.15-.59-9.31l-1.86-9.39c-.51-2.54-1.03-4.71-1.57-6.51M323.83,117.94c-1.18-.56-2.45-.9-3.81-1.02-1.35-.11-2.88.01-4.57.38-1.69.37-3.05.69-4.06.97-1.02.28-2.54.76-4.57,1.44l-.51.17c-16.81,5.7-31.41,7.13-43.82,4.31-7.78-1.69-12.15-5.1-13.11-10.24-.51-3.38-.14-6.8,1.1-10.23,1.75-5.75,4.27-10.8,7.57-15.14,3.3-4.34,7.85-9.11,13.66-14.29,2.71-2.42,6.26-4.88,10.66-7.36,4.4-2.48,8.13-4.4,11.21-5.75,3.07-1.35,7.01-3.02,11.8-4.99l1.18-.51c4.29-1.69,6.94-4,7.95-6.94.73-2.26.56-4.4-.51-6.43-1.52-2.99-3.95-5.08-7.27-6.26-1.69-.56-3.47-.85-5.33-.85-4.29.17-8.43,1.13-12.43,2.88-11.79,4.96-22.3,11.81-31.55,20.56-9.42,8.06-17.12,17.51-23.09,28.34-3.33,6.43-5.44,12.82-6.34,19.16-.9,6.34-.48,12.05,1.27,17.13,1.47,4,3.65,7.57,6.56,10.7,2.9,3.13,6.33,5.51,10.28,7.15,9.64,4.51,20.85,6.57,33.63,6.17,12.77-.39,25.93-3.21,39.46-8.46,3.05-.9,5.72-2.48,8.04-4.74,2.59-3.16,3.16-6.6,1.69-10.32-.9-2.71-2.59-4.65-5.08-5.84M202.52,109.23c-.39-2.03-1.02-5.27-1.86-9.73-.85-4.45-1.52-7.98-2.03-10.57-.51-2.59-1.21-5.74-2.11-9.43-.9-3.69-1.83-7.06-2.79-10.11-.96-2.88-1.85-5.43-2.66-7.66-.82-2.23-1.92-4.72-3.3-7.49-1.38-2.76-2.82-5.16-4.31-7.19-1.49-2.03-3.31-3.95-5.46-5.75-2.14-1.8-4.46-3.21-6.94-4.23-1.92-.79-3.84-1.27-5.75-1.44-1.52-.17-3.02-.08-4.48.25-2.54.56-5.05,1.72-7.53,3.47l-.17.08c-1.13.62-2.17,1.47-3.13,2.54-.9.96-1.92,2.31-3.05,4.06l-.59.85c-3.33,4.85-7.75,12.24-13.28,22.16-.34.68-.87,1.68-1.61,3-.73,1.33-1.3,2.3-1.69,2.92-1.75,2.99-3.95,6.65-6.6,11l-1.27,2.03c-1.24,2.09-2.62,4.34-4.14,6.77l-2.11,3.38c-.28.45-.7.62-1.27.51-.56-.11-.9-.42-1.02-.93l-.76-3.89c-.34-1.58-.83-3.98-1.48-7.19-.65-3.21-1.14-5.61-1.48-7.19-1.07-5.24-2.65-10.35-4.74-15.31-.34-.79-.85-1.92-1.52-3.38-.85-1.58-1.92-3.07-3.21-4.48l-.34-.42c-1.13-.9-2.31-1.75-3.55-2.54-1.92-1.02-3.89-1.75-5.92-2.2-2.09-.45-4.06-.68-5.92-.68-1.47,0-3.13.2-4.99.59-3.21.79-5.95,2.23-8.21,4.31-2.71,2.88-4.91,6.26-6.6,10.15l-.59,1.02c-1.3,2.59-2.82,5.95-4.57,10.07-.17.34-.44.97-.8,1.9-.37.93-.66,1.62-.89,2.07-.56,1.24-1.35,3.1-2.37,5.58-1.02,2.48-1.81,4.34-2.37,5.58l-2.11,4.82c-4.34,10.21-9.36,22.13-15.06,35.78-.68,2.43-.31,4.85,1.1,7.27,1.47,2.43,3.5,4.03,6.09,4.82,1.07.45,2.1.59,3.09.42.99-.17,1.87-.34,2.66-.51.79-.17,1.56-.59,2.33-1.27.76-.68,1.41-1.31,1.95-1.9.54-.59,1.08-1.38,1.65-2.37.56-.99,1.04-1.89,1.44-2.71.39-.82.82-1.76,1.27-2.83.45-1.07.82-2.03,1.1-2.88.28-.85.6-1.76.97-2.75.37-.99.69-1.79.97-2.41,3.21-7.67,8.09-19.17,14.63-34.51l.93-2.03c.34-.73.85-1.89,1.52-3.47.68-1.58,1.18-2.73,1.52-3.47.51-1.18,1.31-2.07,2.41-2.66,1.1-.59,2.3-.77,3.59-.55,1.13.23,2.13.73,3,1.52.87.79,1.42,1.75,1.65,2.88.17.73.41,1.85.72,3.34.31,1.49.55,2.64.72,3.43l.68,2.88c.56,2.65,1.35,6.63,2.37,11.93l1.27,6.6.34,1.86c.39,3.16,1.27,6.29,2.62,9.39.56,1.35,1.24,2.43,2.03,3.21,1.97,1.92,4.33,3.1,7.06,3.55,2.73.45,5.34.08,7.82-1.1,2.93-1.47,6.34-4.68,10.24-9.64,5.81-7.5,13.34-19.37,22.58-35.61,5.53-9.53,9.39-16.04,11.59-19.54.68-1.13,1.61-1.95,2.79-2.45,1.35-.56,2.71-.59,4.06-.08,1.35.51,2.37,1.41,3.05,2.71,2.37,4.57,4.44,9.8,6.22,15.69,1.78,5.89,3.03,10.79,3.76,14.68.73,3.89,1.64,9.39,2.71,16.49,1.24,8.85,2.99,17.76,5.24,26.73.51,1.97,1.52,3.65,3.05,5.03,1.52,1.38,3.3,2.19,5.33,2.41,2.03.28,3.96-.04,5.79-.97,1.83-.93,3.26-2.27,4.27-4.02,1.41-2.37,1.75-4.88,1.02-7.53-.11-.34-1.64-7.89-4.57-22.67"/></svg>
+  </a>
   <ul class="nav-links">
+    <li><a href="#competences">À propos</a></li>
     <li><a href="#projets">Projets</a></li>
-    <li><a href="#a-propos">À propos</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- ── Hero ── -->
 <section id="accueil">
-  <div class="hero-inner">
-    <h1>Marie<br><span>Caroff-Gourvil</span></h1>
-    <p>Graphiste & direction artistique — conception print, identité visuelle et création digitale.</p>
-    <a href="#projets" class="hero-cta">Voir mes projets</a>
+  <div class="hero-watermark">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 182.59"><path d="M437.73,112.27c-.54-1.8-1.3-3.69-2.28-5.67-.99-1.97-2.26-3.55-3.81-4.74-1.55-1.18-3.37-1.95-5.46-2.28-1.69-.28-3.38-.2-5.08.25-1.41.34-3.1,1.2-5.08,2.58-1.97,1.38-3.58,2.64-4.82,3.76-1.24,1.13-2.93,2.76-5.08,4.91-2.2,2.2-4,3.89-5.41,5.08-3.44,2.82-7.12,5.1-11.04,6.85-3.92,1.75-7.26,2.31-10.02,1.69-2.2-.45-3.81-1.72-4.82-3.81-1.07-2.25-1.58-4.67-1.52-7.23.06-2.57.37-4.65.93-6.26.56-1.61,1.47-3.9,2.71-6.89l.51-1.27c5.08-12.18,11.22-21.91,18.44-29.18,9.3-9.36,19.71-14.35,31.21-14.97.68-.06,1.72-.08,3.13-.08,3.1.17,6.06-.28,8.88-1.35,3.44-1.75,5.22-4.6,5.33-8.54-.11-3.95-1.89-6.82-5.33-8.63-2.03-.96-4.14-1.47-6.34-1.52-2.03-.11-3.55-.17-4.57-.17-8.12.06-15.9,1.61-23.35,4.65-7.44,3.05-14.04,7.39-19.79,13.03-8.01,7.84-14.73,16.92-20.18,27.24-5.44,10.32-10.02,22.7-13.75,37.14-.73,2.82-1.23,5.55-1.48,8.2-.25,2.65-.01,5.66.72,9.01.73,3.36,2.2,6.02,4.4,7.99,5.98,5.24,14.04,6.91,24.19,4.99,5.92-1.07,11.5-3.13,16.75-6.17.96-.56,3.24-2.09,6.85-4.57.28-.17.65-.42,1.1-.76.45-.34.82-.59,1.1-.76.11-.06.41-.24.89-.55.48-.31.92-.58,1.31-.8,4.23-2.65,6.71-4.23,7.44-4.74,1.35-.96,2.73-1.13,4.14-.51,1.47.62,2.34,1.75,2.62,3.38.79,5.24,2.42,8.91,4.91,11,2.71,2.26,5.78,2.85,9.22,1.78,1.58-.51,2.95-1.37,4.1-2.58,1.16-1.21,1.93-2.63,2.33-4.27.51-3.05.31-6.15-.59-9.31l-1.86-9.39c-.51-2.54-1.03-4.71-1.57-6.51M323.83,117.94c-1.18-.56-2.45-.9-3.81-1.02-1.35-.11-2.88.01-4.57.38-1.69.37-3.05.69-4.06.97-1.02.28-2.54.76-4.57,1.44l-.51.17c-16.81,5.7-31.41,7.13-43.82,4.31-7.78-1.69-12.15-5.1-13.11-10.24-.51-3.38-.14-6.8,1.1-10.23,1.75-5.75,4.27-10.8,7.57-15.14,3.3-4.34,7.85-9.11,13.66-14.29,2.71-2.42,6.26-4.88,10.66-7.36,4.4-2.48,8.13-4.4,11.21-5.75,3.07-1.35,7.01-3.02,11.8-4.99l1.18-.51c4.29-1.69,6.94-4,7.95-6.94.73-2.26.56-4.4-.51-6.43-1.52-2.99-3.95-5.08-7.27-6.26-1.69-.56-3.47-.85-5.33-.85-4.29.17-8.43,1.13-12.43,2.88-11.79,4.96-22.3,11.81-31.55,20.56-9.42,8.06-17.12,17.51-23.09,28.34-3.33,6.43-5.44,12.82-6.34,19.16-.9,6.34-.48,12.05,1.27,17.13,1.47,4,3.65,7.57,6.56,10.7,2.9,3.13,6.33,5.51,10.28,7.15,9.64,4.51,20.85,6.57,33.63,6.17,12.77-.39,25.93-3.21,39.46-8.46,3.05-.9,5.72-2.48,8.04-4.74,2.59-3.16,3.16-6.6,1.69-10.32-.9-2.71-2.59-4.65-5.08-5.84M202.52,109.23c-.39-2.03-1.02-5.27-1.86-9.73-.85-4.45-1.52-7.98-2.03-10.57-.51-2.59-1.21-5.74-2.11-9.43-.9-3.69-1.83-7.06-2.79-10.11-.96-2.88-1.85-5.43-2.66-7.66-.82-2.23-1.92-4.72-3.3-7.49-1.38-2.76-2.82-5.16-4.31-7.19-1.49-2.03-3.31-3.95-5.46-5.75-2.14-1.8-4.46-3.21-6.94-4.23-1.92-.79-3.84-1.27-5.75-1.44-1.52-.17-3.02-.08-4.48.25-2.54.56-5.05,1.72-7.53,3.47l-.17.08c-1.13.62-2.17,1.47-3.13,2.54-.9.96-1.92,2.31-3.05,4.06l-.59.85c-3.33,4.85-7.75,12.24-13.28,22.16-.34.68-.87,1.68-1.61,3-.73,1.33-1.3,2.3-1.69,2.92-1.75,2.99-3.95,6.65-6.6,11l-1.27,2.03c-1.24,2.09-2.62,4.34-4.14,6.77l-2.11,3.38c-.28.45-.7.62-1.27.51-.56-.11-.9-.42-1.02-.93l-.76-3.89c-.34-1.58-.83-3.98-1.48-7.19-.65-3.21-1.14-5.61-1.48-7.19-1.07-5.24-2.65-10.35-4.74-15.31-.34-.79-.85-1.92-1.52-3.38-.85-1.58-1.92-3.07-3.21-4.48l-.34-.42c-1.13-.9-2.31-1.75-3.55-2.54-1.92-1.02-3.89-1.75-5.92-2.2-2.09-.45-4.06-.68-5.92-.68-1.47,0-3.13.2-4.99.59-3.21.79-5.95,2.23-8.21,4.31-2.71,2.88-4.91,6.26-6.6,10.15l-.59,1.02c-1.3,2.59-2.82,5.95-4.57,10.07-.17.34-.44.97-.8,1.9-.37.93-.66,1.62-.89,2.07-.56,1.24-1.35,3.1-2.37,5.58-1.02,2.48-1.81,4.34-2.37,5.58l-2.11,4.82c-4.34,10.21-9.36,22.13-15.06,35.78-.68,2.43-.31,4.85,1.1,7.27,1.47,2.43,3.5,4.03,6.09,4.82,1.07.45,2.1.59,3.09.42.99-.17,1.87-.34,2.66-.51.79-.17,1.56-.59,2.33-1.27.76-.68,1.41-1.31,1.95-1.9.54-.59,1.08-1.38,1.65-2.37.56-.99,1.04-1.89,1.44-2.71.39-.82.82-1.76,1.27-2.83.45-1.07.82-2.03,1.1-2.88.28-.85.6-1.76.97-2.75.37-.99.69-1.79.97-2.41,3.21-7.67,8.09-19.17,14.63-34.51l.93-2.03c.34-.73.85-1.89,1.52-3.47.68-1.58,1.18-2.73,1.52-3.47.51-1.18,1.31-2.07,2.41-2.66,1.1-.59,2.3-.77,3.59-.55,1.13.23,2.13.73,3,1.52.87.79,1.42,1.75,1.65,2.88.17.73.41,1.85.72,3.34.31,1.49.55,2.64.72,3.43l.68,2.88c.56,2.65,1.35,6.63,2.37,11.93l1.27,6.6.34,1.86c.39,3.16,1.27,6.29,2.62,9.39.56,1.35,1.24,2.43,2.03,3.21,1.97,1.92,4.33,3.1,7.06,3.55,2.73.45,5.34.08,7.82-1.1,2.93-1.47,6.34-4.68,10.24-9.64,5.81-7.5,13.34-19.37,22.58-35.61,5.53-9.53,9.39-16.04,11.59-19.54.68-1.13,1.61-1.95,2.79-2.45,1.35-.56,2.71-.59,4.06-.08,1.35.51,2.37,1.41,3.05,2.71,2.37,4.57,4.44,9.8,6.22,15.69,1.78,5.89,3.03,10.79,3.76,14.68.73,3.89,1.64,9.39,2.71,16.49,1.24,8.85,2.99,17.76,5.24,26.73.51,1.97,1.52,3.65,3.05,5.03,1.52,1.38,3.3,2.19,5.33,2.41,2.03.28,3.96-.04,5.79-.97,1.83-.93,3.26-2.27,4.27-4.02,1.41-2.37,1.75-4.88,1.02-7.53-.11-.34-1.64-7.89-4.57-22.67"/></svg>
+  </div>
+  <div class="hero-content">
+    <p class="hero-subtitle">Graphiste &amp; direction artistique</p>
+    <h1 class="hero-name">Marie<br>Caroff-Gourvil</h1>
+    <p class="hero-desc">Conception print, identité visuelle et création digitale.</p>
+    <a href="#contact" class="btn-outline">Contact</a>
+  </div>
+</section>
+
+<!-- ── Compétences ── -->
+<section id="competences">
+  <div class="competences-grid">
+    <div class="comp-item">
+      <h3>Direction artistique</h3>
+      <p>Pilotage de la vision créative d'un projet, de la définition des partis pris visuels jusqu'à leur déclinaison sur l'ensemble des supports.</p>
+    </div>
+    <div class="comp-item">
+      <h3>Conception graphique</h3>
+      <p>Création et mise en page de supports print et digitaux — affiches, catalogues, visuels réseaux sociaux — avec rigueur et sens du détail.</p>
+    </div>
+    <div class="comp-item">
+      <h3>Stratégie de marque</h3>
+      <p>Réflexion sur l'identité visuelle et le positionnement d'une marque, pour construire une communication cohérente et impactante.</p>
+    </div>
   </div>
 </section>
 
 <!-- ── Projets ── -->
 <section id="projets">
-  <div class="container">
-    <h2 class="section-title">Mes <span>projets</span></h2>
-    <div class="section-line"></div>
+  <div class="projets-inner">
+    <h2 class="projets-titre">Latest work</h2>
+    <div class="projets-grid">
 
-    <div class="carousel">
-      <div class="carousel-track" id="carouselTrack">
-
-        <!-- Slide 1 -->
-        <div class="carousel-slide" onclick="window.location='projet-1.html'">
-          <div class="carousel-placeholder">Ajoute ton image ici</div>
-          <div class="slide-overlay"><span>Voir le projet</span></div>
-          <div class="carousel-caption">
-            <h3>Titre du projet 1</h3>
-            <p>Catégorie — Écomiam, 2025</p>
-          </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-slide" onclick="window.location='projet-2.html'">
-          <div class="carousel-placeholder">Ajoute ton image ici</div>
-          <div class="slide-overlay"><span>Voir le projet</span></div>
-          <div class="carousel-caption">
-            <h3>Titre du projet 2</h3>
-            <p>Catégorie — Écomiam, 2025</p>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-slide" onclick="window.location='projet-3.html'">
-          <div class="carousel-placeholder">Ajoute ton image ici</div>
-          <div class="slide-overlay"><span>Voir le projet</span></div>
-          <div class="carousel-caption">
-            <h3>Titre du projet 3</h3>
-            <p>Catégorie — Écomiam, 2025</p>
-          </div>
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="carousel-slide" onclick="window.location='projet-4.html'">
-          <div class="carousel-placeholder">Ajoute ton image ici</div>
-          <div class="slide-overlay"><span>Voir le projet</span></div>
-          <div class="carousel-caption">
-            <h3>Titre du projet 4</h3>
-            <p>Catégorie — Sofico, 2023</p>
-          </div>
-        </div>
-
-      </div><!-- /track -->
-    </div><!-- /carousel -->
-
-    <div class="carousel-controls">
-      <button class="carousel-btn" id="prevBtn" aria-label="Précédent">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <div class="carousel-dots" id="carouselDots"></div>
-      <button class="carousel-btn" id="nextBtn" aria-label="Suivant">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── À propos ── -->
-<section id="a-propos">
-  <div class="container">
-    <h2 class="section-title">À <span>propos</span></h2>
-    <div class="section-line"></div>
-
-    <div class="apropos-grid">
-      <div class="apropos-text">
-        <p>Curieuse et rigoureuse, je m'épanouis dans les projets graphiques qui demandent à la fois créativité et exécution soignée. Après deux ans à décliner l'identité visuelle d'une marque nationale, je cherche à m'investir dans un environnement créatif stimulant.</p>
-        <p>Actuellement en Mastère Direction Artistique – Brand Design à Ynov Rennes (2024–2026), je finalise mon alternance chez Écomiam en septembre 2026.</p>
+      <!-- Carte 1 -->
+      <div class="projet-card">
+        <div class="projet-card-placeholder"></div>
+        <!-- <img class="projet-card-img" src="images/projet-1.jpg" alt="Projet 1" /> -->
+        <h4>Project title</h4>
+        <span>UI, Art direction</span>
+        <a href="projet-1.html" class="btn-filled">Voir plus</a>
       </div>
 
-      <div class="skills-grid">
-        <div class="skills-block">
-          <h4>Compétences</h4>
-          <ul>
-            <li>Conception print multi-supports</li>
-            <li>Identité visuelle & déclinaison de charte</li>
-            <li>Création réseaux sociaux</li>
-            <li>Captation photo produit</li>
-          </ul>
-        </div>
-        <div class="skills-block">
-          <h4>Outils</h4>
-          <ul>
-            <li>Adobe InDesign</li>
-            <li>Adobe Photoshop</li>
-            <li>Adobe Illustrator</li>
-            <li>Notion · Trello</li>
-          </ul>
-        </div>
-        <div class="skills-block">
-          <h4>Qualités</h4>
-          <ul>
-            <li>Organisée</li>
-            <li>Rigoureuse</li>
-            <li>Force de proposition</li>
-            <li>Adaptable</li>
-            <li>Curieuse</li>
-          </ul>
-        </div>
-        <div class="skills-block">
-          <h4>Formation</h4>
-          <ul>
-            <li>Mastère DA – Brand Design</li>
-            <li>Bachelor Communication</li>
-            <li>BTS Communication</li>
-          </ul>
-        </div>
+      <!-- Carte 2 -->
+      <div class="projet-card">
+        <div class="projet-card-placeholder"></div>
+        <h4>Project title</h4>
+        <span>UI, Art direction</span>
+        <a href="projet-2.html" class="btn-filled">Voir plus</a>
       </div>
+
+      <!-- Carte 3 -->
+      <div class="projet-card">
+        <div class="projet-card-placeholder"></div>
+        <h4>Project title</h4>
+        <span>UI, Art direction</span>
+        <a href="projet-3.html" class="btn-filled">Voir plus</a>
+      </div>
+
+      <!-- Carte 4 -->
+      <div class="projet-card">
+        <div class="projet-card-placeholder"></div>
+        <h4>Project title</h4>
+        <span>UI, Art direction</span>
+        <a href="projet-4.html" class="btn-filled">Voir plus</a>
+      </div>
+
+      <!-- Carte 5 -->
+      <div class="projet-card">
+        <div class="projet-card-placeholder"></div>
+        <h4>Project title</h4>
+        <span>UI, Art direction</span>
+        <a href="projet-5.html" class="btn-filled">Voir plus</a>
+      </div>
+
+      <!-- Carte 6 -->
+      <div class="projet-card">
+        <div class="projet-card-placeholder"></div>
+        <h4>Project title</h4>
+        <span>UI, Art direction</span>
+        <a href="projet-6.html" class="btn-filled">Voir plus</a>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- ── Contact ── -->
 <section id="contact">
-  <div class="container">
-    <h2 class="section-title">Me <span style="color:var(--accent-light)">contacter</span></h2>
-    <div class="section-line"></div>
-
-    <div class="contact-grid">
-      <div class="contact-info">
-        <p>Disponible à partir de septembre 2026. N'hésitez pas à me contacter pour toute proposition ou collaboration.</p>
-        <div class="contact-links">
-          <a href="mailto:marie.caroff.gourvil@gmail.com" class="contact-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            marie.caroff.gourvil@gmail.com
-          </a>
-          <a href="https://www.linkedin.com/in/" target="_blank" class="contact-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
-          <a href="CV.pdf" download class="contact-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-            Télécharger mon CV
-          </a>
-        </div>
-      </div>
-
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <input type="text" placeholder="Prénom" required />
-          <input type="text" placeholder="Nom" required />
-        </div>
-        <input type="email" placeholder="Email" required />
-        <input type="text" placeholder="Sujet" />
-        <textarea placeholder="Votre message…" required></textarea>
-        <button type="submit" class="form-submit">Envoyer</button>
-      </form>
+  <div class="contact-inner">
+    <div class="contact-left">
+      <h2>Lets work<br>together</h2>
+      <p>Disponible à partir de septembre 2026. N'hésitez pas à me contacter pour toute proposition ou collaboration.</p>
+      <a href="https://www.linkedin.com/in/" target="_blank" class="linkedin-link">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+      </a>
     </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="Name" required />
+      <input type="email" placeholder="Email" required />
+      <button type="submit" class="btn-submit">Submit</button>
+    </form>
   </div>
 </section>
 
-<!-- ── Footer ── -->
-<footer>
-  © 2026 Marie Caroff-Gourvil — Tous droits réservés
-</footer>
-
 <script>
-  // ── Carrousel ──
-  const track = document.getElementById('carouselTrack');
-  const slides = track.querySelectorAll('.carousel-slide');
-  const dotsContainer = document.getElementById('carouselDots');
-  let current = 0;
-
-  // Créer les dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  function goTo(index) {
-    current = (index + slides.length) % slides.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
-
-  // Auto-play
-  setInterval(() => goTo(current + 1), 4000);
-
-  // ── Formulaire ──
   function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.form-submit');
-    btn.textContent = 'Message envoyé ✓';
-    btn.style.background = '#3a7d44';
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = 'Envoyé ✓';
+    btn.style.opacity = '0.6';
     setTimeout(() => {
-      btn.textContent = 'Envoyer';
-      btn.style.background = '';
+      btn.textContent = 'Submit';
+      btn.style.opacity = '';
       e.target.reset();
     }, 3000);
   }
