@@ -79,11 +79,11 @@
 
     .hero-watermark {
       position: absolute;
-      left: 2rem;
+      left: -2rem;
       top: 50%;
       transform: translateY(-50%);
       width: 42%;
-      opacity: 0.20;
+      opacity: 0.07;
       user-select: none;
       pointer-events: none;
     }
@@ -97,14 +97,14 @@
     .hero-content {
       position: relative;
       z-index: 1;
-      margin-left: 50%;
-      max-width: 650px;
+      margin-left: auto;
+      max-width: 640px;
       width: 100%;
     }
 
     .hero-subtitle {
       color: rgba(255,255,255,0.9);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 500;
       letter-spacing: 0.02em;
       margin-bottom: 0.6rem;
@@ -113,7 +113,7 @@
     .hero-name {
       color: var(--white);
       font-size: clamp(3rem, 7vw, 5.5rem);
-      font-weight: 650;
+      font-weight: 700;
       line-height: 1.0;
       letter-spacing: -0.03em;
       margin-bottom: 1rem;
@@ -121,7 +121,7 @@
 
     .hero-desc {
       color: rgba(255,255,255,0.75);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 400;
       margin-bottom: 1.8rem;
       line-height: 1.5;
@@ -160,14 +160,14 @@
     }
 
     .comp-item h3 {
-      font-size: 1.20rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--blue);
       margin-bottom: 0.8rem;
     }
 
     .comp-item p {
-      font-size: 1rem;
+      font-size: 0.88rem;
       color: var(--blue);
       line-height: 1.7;
       font-weight: 400;
@@ -175,72 +175,83 @@
 
     /* ── Projets ── */
     #projets {
-      padding: 4rem 3rem 5rem;
+      padding: 4rem 5rem 5rem;
       background: var(--white);
     }
 
     .projets-inner { max-width: 1100px; margin: 0 auto; }
 
     .projets-titre {
-      text-align: center;
       font-size: 1.6rem;
       font-weight: 700;
       color: var(--blue);
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
 
-    .projets-grid {
+    .projet-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 3rem 0;
+      border-top: 1px solid #eee;
     }
 
-    .projet-card { display: flex; flex-direction: column; gap: 0.6rem; }
+    .projet-row:last-child { border-bottom: 1px solid #eee; }
 
-    .projet-card-img {
+    .projet-row-img {
       width: 100%;
       aspect-ratio: 4/3;
       object-fit: cover;
       display: block;
-      background: #ddd;
-      border-radius: 2px;
+      border-radius: 3px;
+      background: #e8e8e8;
     }
 
-    .projet-card-placeholder {
+    .projet-row-placeholder {
       width: 100%;
       aspect-ratio: 4/3;
       background: #111;
-      border-radius: 2px;
+      border-radius: 3px;
     }
 
-    .projet-card h4 {
-      font-size: 1rem;
+    .projet-row-info { display: flex; flex-direction: column; gap: 1rem; }
+
+    .projet-row-meta {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .projet-row-meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .projet-row-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .projet-row-value {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .projet-row-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
       font-weight: 700;
       color: var(--text);
-      margin-top: 0.4rem;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
 
-    .projet-card span {
-      font-size: 0.82rem;
+    .projet-row-desc {
+      font-size: 0.9rem;
       color: var(--muted);
-      font-weight: 400;
+      line-height: 1.8;
     }
-
-    .btn-filled {
-      display: inline-block;
-      margin-top: 0.4rem;
-      padding: 0.5rem 1.2rem;
-      background: var(--blue);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 600;
-      border-radius: 50px;
-      transition: opacity 0.2s;
-      width: fit-content;
-    }
-
-    .btn-filled:hover { opacity: 0.8; }
 
     /* ── Contact ── */
     #contact {
@@ -328,7 +339,7 @@
       .hero-content { margin-left: 0; }
       .competences-grid { grid-template-columns: 1fr; gap: 2rem; }
       #competences, #projets, #contact { padding: 3rem 1.5rem; }
-      .projets-grid { grid-template-columns: 1fr; }
+      .projet-row { grid-template-columns: 1fr; gap: 1.5rem; }
       .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     }
   </style>
@@ -354,7 +365,7 @@
   </div>
   <div class="hero-content">
     <p class="hero-subtitle">Graphiste &amp; direction artistique</p>
-    <h1 class="hero-name">Marie<br>Caroff Gourvil</h1>
+    <h1 class="hero-name">Marie<br>Caroff-Gourvil</h1>
     <p class="hero-desc">Conception print, identité visuelle et création digitale.</p>
     <a href="#contact" class="btn-outline">Contact</a>
   </div>
@@ -381,59 +392,48 @@
 <!-- ── Projets ── -->
 <section id="projets">
   <div class="projets-inner">
-    <h2 class="projets-titre">Projets récents</h2>
-    <div class="projets-grid">
+    <h2 class="projets-titre">Latest work</h2>
 
-      <!-- Carte 1 -->
-      <div class="projet-card">
-        <img src="Free iPhone 16 Pro Laying on Floor Mockup.jpg" style="width:100%; height:100%; object-fit:cover; display:block;" alt=""/>
-        <!-- <img class="projet-card-img" src="images/projet-1.jpg" alt="Projet 1" /> -->
-        <h4>Sens</h4>
-        <span>Direction artistique, positionnement de marque, UI</span>
-        <a href="projet-1.html" class="btn-filled">Voir plus</a>
+      <!-- Projet 1 -->
+      <div class="projet-row">
+        <div class="projet-row-placeholder"></div>
+        <!-- <img class="projet-row-img" src="images/sens.hero.jpg" alt="SENS" /> -->
+        <div class="projet-row-info">
+          <div class="projet-row-meta">
+            <div class="projet-row-meta-item"><span class="projet-row-label">Année</span><span class="projet-row-value">2026</span></div>
+            <div class="projet-row-meta-item"><span class="projet-row-label">Catégorie</span><span class="projet-row-value">Print · Identité visuelle</span></div>
+          </div>
+          <h3 class="projet-row-title">Titre du projet 1</h3>
+          <p class="projet-row-desc">Description courte du projet — contexte, objectif et ce que tu as apporté créativement.</p>
+        </div>
       </div>
 
-      <!-- Carte 2 -->
-      <div class="projet-card">
-        <div class="kinz.hero.jpg"></div>
-        <h4>Kinz</h4>
-        <span>Direction artistique, gestion de projet</span>
-        <a href="projet-2.html" class="btn-filled">Voir plus</a>
+      <!-- Projet 2 -->
+      <div class="projet-row">
+        <div class="projet-row-placeholder"></div>
+        <div class="projet-row-info">
+          <div class="projet-row-meta">
+            <div class="projet-row-meta-item"><span class="projet-row-label">Année</span><span class="projet-row-value">2025</span></div>
+            <div class="projet-row-meta-item"><span class="projet-row-label">Catégorie</span><span class="projet-row-value">Direction artistique</span></div>
+          </div>
+          <h3 class="projet-row-title">Titre du projet 2</h3>
+          <p class="projet-row-desc">Description courte du projet — contexte, objectif et ce que tu as apporté créativement.</p>
+        </div>
       </div>
 
-      <!-- Carte 3 -->
-      <div class="projet-card">
-        <div class="projet-card-placeholder"></div>
-        <h4>Project title</h4>
-        <span>UI, Art direction</span>
-        <a href="projet-3.html" class="btn-filled">Voir plus</a>
+      <!-- Projet 3 -->
+      <div class="projet-row">
+        <div class="projet-row-placeholder"></div>
+        <div class="projet-row-info">
+          <div class="projet-row-meta">
+            <div class="projet-row-meta-item"><span class="projet-row-label">Année</span><span class="projet-row-value">2025</span></div>
+            <div class="projet-row-meta-item"><span class="projet-row-label">Catégorie</span><span class="projet-row-value">Conception graphique</span></div>
+          </div>
+          <h3 class="projet-row-title">Titre du projet 3</h3>
+          <p class="projet-row-desc">Description courte du projet — contexte, objectif et ce que tu as apporté créativement.</p>
+        </div>
       </div>
 
-      <!-- Carte 4 -->
-      <div class="projet-card">
-        <div class="projet-card-placeholder"></div>
-        <h4>Project title</h4>
-        <span>UI, Art direction</span>
-        <a href="projet-4.html" class="btn-filled">Voir plus</a>
-      </div>
-
-      <!-- Carte 5 -->
-      <div class="projet-card">
-        <div class="projet-card-placeholder"></div>
-        <h4>Project title</h4>
-        <span>UI, Art direction</span>
-        <a href="projet-5.html" class="btn-filled">Voir plus</a>
-      </div>
-
-      <!-- Carte 6 -->
-      <div class="projet-card">
-        <div class="projet-card-placeholder"></div>
-        <h4>Project title</h4>
-        <span>UI, Art direction</span>
-        <a href="projet-6.html" class="btn-filled">Voir plus</a>
-      </div>
-
-    </div>
   </div>
 </section>
 
@@ -441,9 +441,9 @@
 <section id="contact">
   <div class="contact-inner">
     <div class="contact-left">
-      <h2>Restons<br>en contact</h2>
+      <h2>Lets work<br>together</h2>
       <p>Disponible à partir de septembre 2026. N'hésitez pas à me contacter pour toute proposition ou collaboration.</p>
-      <a href="https://www.linkedin.com/in/marie-caroff-gourvil-72aa4721b/?skipRedirect=true/in/" target="_blank" class="linkedin-link">
+      <a href="https://www.linkedin.com/in/" target="_blank" class="linkedin-link">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
           <rect x="2" y="9" width="4" height="12"/>
