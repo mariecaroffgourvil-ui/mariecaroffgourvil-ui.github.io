@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projet 4 — Marie Caroff-Gourvil</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2044;
+      --navy-light: #2a3260;
+      --accent: #4f5fa8;
+      --accent-light: #7b8fd4;
+      --white: #ffffff;
+      --off-white: #f5f5f7;
+      --text: #222;
+      --muted: #666;
+      --font: 'Clash Display', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--white);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: var(--navy);
+    }
+
+    .nav-logo {
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--white); }
+
+    /* ── Hero projet ── */
+    .projet-hero {
+      margin-top: 64px;
+      width: 100%;
+      height: 60vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Si tu mets une image : remplace le div.projet-hero par <img> */
+    .projet-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Contenu ── */
+    .projet-content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2rem 6rem;
+    }
+
+    /* Infos en tête */
+    .projet-meta {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .meta-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .meta-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Titre */
+    .projet-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Texte de description */
+    .projet-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 640px;
+      margin-bottom: 3rem;
+    }
+
+    .projet-desc p + p { margin-top: 1rem; }
+
+    /* ── Galerie photos ── */
+    .galerie {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    /* Layout par défaut : une image large puis 2 en dessous */
+    .galerie-main {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      border-radius: 3px;
+      background: var(--off-white);
+    }
+
+    .galerie-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .galerie-grid img,
+    .galerie-single img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      border-radius: 3px;
+      background: var(--off-white);
+    }
+
+    /* Placeholder visuel quand pas d'image */
+    .img-placeholder {
+      background: linear-gradient(135deg, #e8eaf0 0%, #d0d4e8 100%);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .img-placeholder.main { width: 100%; aspect-ratio: 16/9; }
+    .img-placeholder.grid { width: 100%; aspect-ratio: 4/3; }
+
+    /* ── Footer ── */
+    .projet-footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover { color: var(--navy); }
+
+    footer {
+      background: var(--navy);
+      text-align: center;
+      padding: 1.5rem;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .galerie-grid { grid-template-columns: 1fr; }
+      .projet-meta { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-logo">MCG</a>
+  <a href="index.html#projets" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour aux projets
+  </a>
+</nav>
+
+<!-- Image principale — remplace le div par une balise img si tu as une image -->
+<div class="projet-hero">
+  Ajoute ton image principale ici
+  <!-- <img src="images/projet-4-hero.jpg" alt="Titre du projet 4" /> -->
+</div>
+
+<!-- Contenu -->
+<div class="projet-content">
+
+  <!-- Métadonnées -->
+  <div class="projet-meta">
+    <div class="meta-item">
+      <span class="meta-label">Client</span>
+      <span class="meta-value">Écomiam</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Année</span>
+      <span class="meta-value">2025</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Catégorie</span>
+      <span class="meta-value">Print · Identité visuelle</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Outils</span>
+      <span class="meta-value">Adobe InDesign · Illustrator</span>
+    </div>
+  </div>
+
+  <!-- Titre + description -->
+  <h1 class="projet-title">Titre du projet 4</h1>
+
+  <div class="projet-desc">
+    <p>Décris ici le contexte du projet : brief reçu, objectif, contraintes. Une ou deux phrases suffisent pour poser la situation.</p>
+    <p>Ensuite explique ta démarche et tes choix créatifs. Qu'est-ce que tu as apporté ? Qu'est-ce qui fait que ce projet est intéressant à montrer ?</p>
+  </div>
+
+  <!-- Galerie -->
+  <div class="galerie">
+
+    <!-- Image large -->
+    <div class="img-placeholder main">Image principale</div>
+    <!-- <img class="galerie-main" src="images/projet-4-a.jpg" alt="" /> -->
+
+    <!-- Deux images côte à côte -->
+    <div class="galerie-grid">
+      <div class="img-placeholder grid">Image 2</div>
+      <div class="img-placeholder grid">Image 3</div>
+      <!-- <img src="images/projet-4-b.jpg" alt="" />
+           <img src="images/projet-4-c.jpg" alt="" /> -->
+    </div>
+
+    <!-- Image simple pleine largeur -->
+    <div class="galerie-grid">
+      <div class="img-placeholder grid">Image 4</div>
+      <div class="img-placeholder grid">Image 5</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Navigation entre projets -->
+<div class="projet-footer">
+  <div class="footer-nav">
+    <a href="projet-4.html">← Projet précédent</a>
+  </div>
+  <div class="footer-nav">
+    <a href="projet-2.html">Projet suivant →</a>
+  </div>
+</div>
+
+<footer>
+  © 2026 Marie Caroff-Gourvil — Tous droits réservés
+</footer>
+
+</body>
+</html>
